@@ -1,129 +1,101 @@
-# Clean Architecture and Test Driven Development (TDD) using TypeScript
+# LitElement JavaScript starter 
 
-![Clean Architecture Banner](./images//clean-architecture-banner.png)
+This project includes a sample component using LitElement with JavaScript.
 
-Clean Architecture is an architecture design developed by [Robert C. Martin (Uncle Bob)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). You will find many tutorials talking about the theory and concepts behind Clean Architecture. How you choose to apply these concepts in your project is up to you. You will see in [this article](https://www.freecodecamp.org/news/a-quick-introduction-to-clean-architecture-990c014448d2/), some variations of this design.
+## Setup
 
-With all these concepts, I wanted to provide a real-world example using best practices applying Clean Architecture.
+Install dependencies:
 
-![Clean Architecture Diagram](./images/clean_architecture.jpeg)
-
-## What does this example project do?
-
-The application fetches number trivia from [Numbers API](http://numbersapi.com/#42) when connected to the internet (online). If the application detects a network connection is no longer present (offline), it will fetch the last trivia from local cache. You can fetch trivia from a number you provide or a random number provided by the API. Because the business logic independent of any presentation or frameworks, applications representing the presentation layer can be built using different UI framework and adapters. This project provides some concrete implementations using [React.js](https://reactjs.org/) and [Vue.js](https://vuejs.org/).
-
-![Application Example](./images/app_example.png)
-
-## What's inside?
-
-This project was built using [Turborepo](https://turborepo.org/). This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes the following packages/apps:
-
-### Apps and Packages
-
-- `apps/react`: a [React.js](https://reactjs.org/) app
-- `apps/vue`: a [Vue.js](https://vuejs.org/) app
-- `apps/server`: a [Node.js](https://vuejs.org/) web service. [See Readme](./apps/api/README.md)
-- `packages/business`: business logic demonstrating how to implement the `domain` and `data` layers of clean architecture.
-- `packages/eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `packages/tsconfig`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-## Presentation layer
-
-### Web apps
-
-To demonstrate a clean presentation layer, the web applications use [Shoelace](https://shoelace.style/), a web component library built on [Lit](https://lit.dev/). Developing web components is a best practice when you want to apply the DRY (Don't repeat yourself) principle.
-
-### Server
-
-Custom adapters were developed that leverage our business logic but meet the requirements needed by the server. [See Readme](./apps/api/README.md)
-
-# Test Driven Development (TDD)
-
-The demo is built using TDD ensuring all business logic passes and has coverage. Tests were built and tested using [Vitest](https://vitest.dev/). Vitest is built on top of [Jest](https://jestjs.io/). If you know Jest, you know Vitest. Vitest supports TypeScript by default. Here is a great overview video on Vitest: https://www.youtube.com/watch?v=7f-71kYhK00
-
-![Code Coverage](./images/code_coverage.png)
-
-# Getting Started
-
-### Installing dependencies
-
-To install all apps and packages dependencies, run the following command from the project root:
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-pnpm run build
+```bash
+npm i
 ```
 
-```
-pnpm install
-```
-### Test
+## Testing
 
-To test all apps and packages, run the following command:
+This sample uses Karma, Chai, Mocha, and the open-wc test helpers for testing. See the [open-wc testing documentation](https://open-wc.org/testing/testing.html) for more information.
 
-```
-pnpm run test
-```
+Tests can be run with the `test` script:
 
-The test will be reported in the terminal and in HTML `packages/business/coverage/index.html`.
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-pnpm run dev
+```bash
+npm test
 ```
 
-### Utilities
+## Dev Server
 
-This turborepo has some additional tools already setup for you:
+This sample uses open-wc's [es-dev-server](https://github.com/open-wc/open-wc/tree/master/packages/es-dev-server) for previewing the project without additional build steps. ES dev server handles resolving Node-style "bare" import specifiers, which aren't supported in browsers. It also automatically transpiles JavaScript and adds polyfills to support older browsers.
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+To run the dev server and open the project in a new browser tab:
 
-### Tricks to discovered along the way...
-
-1. In order to get the `business` package to work with the server and web applications, storage needed to be `async`. 
-An important note when building things is its better to go async route initially to avoid reworking code later.
-
-2. Getting the dev and build environments to play with each other was a real pain. The web apps use `vite` while the 
-server uses just the TypeScript compiler. Neither the vite nor the TS docs helped with this issue. I did read thoroughly
-this section in the Vite docs - https://vitejs.dev/guide/build.html#building-for-production. But what it really came
-down to was that I had some luck with the compiling by placing this in the `vite.config.ts` file:
-
-```js
-optimizeDeps: {
-  include: [
-    "business",
-  ],
-},
-build: {
-  rollupOptions: {}
-},
+```bash
+npm run serve
 ```
 
-Notice that the build.rollupOptions just contains an empty object. I don't know why but this works along with the optimizeDeps.
-I don't like that there are some unknowns there at the moment but the project will run and build all projects correctly.
+There is a development HTML file located at `/dev/index.html` that you can view at http://localhost:8000/dev/index.html.
 
-# Roadmap
+## Editing
 
-- [X] Provide a application example in React.
-- [X] Provide a application example in Vue.
-- [X] Provide a service example using Node.js.
-- [ ] Provide a command line example that can be run from the terminal.
-- [ ] Provide a desktop example using Electron.
+If you use VS Code, we highly reccomend the [lit-plugin extension](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin), which enables some extremely useful features for lit-html templates:
+  - Syntax highlighting
+  - Type-checking
+  - Code completion
+  - Hover-over docs
+  - Jump to definition
+  - Linting
+  - Quick Fixes
+  
+  The project is setup to reccomend lit-plugin to VS Code users if they don't already have it installed.
 
-## Credits
+## Linting
 
-*This project is inspired by [Flutter](https://flutter.dev/) tutorials by [Matt Rešetár](https://resocoder.com/)*
+Linting of JavaScript files is provided by [ESLint](eslint.org). In addition, [lit-analyzer](https://www.npmjs.com/package/lit-analyzer) is used to type-check and lint lit-html templates with the same engine and rules as lit-plugin.
 
-## License
+The rules are mostly the recommended rules from each project, but some have been turned off to make LitElement usage easier. The recommended rules are pretty strict, so you may want to relax them by editing `.eslintrc.json`.
 
-MIT license.
+To lint the project run:
+
+```bash
+npm run lint
+```
+
+## Formatting
+
+[Prettier](https://prettier.io/) is used for code formatting. It has been pre-configured according to the Polymer Project's style. You can change this in `.prettierrc.json`.
+
+Prettier has not been configured to run when commiting files, but this can be added with Husky and and `pretty-quick`. See the [prettier.io](https://prettier.io/) site for instructions.
+
+## Static Site
+
+This project includes a simple website generated with the [eleventy](11ty.dev) static site generator and the templates and pages in `/docs-src`. The site is generated to `/docs` and intended to be checked in so that GitHub pages can serve the site [from `/docs` on the master branch](https://help.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+
+To enable the site go to the GitHub settings and change the GitHub Pages &quot;Source&quot; setting to &quot;master branch /docs folder&quot;.</p>
+
+To build the site, run:
+
+```bash
+npm run docs
+```
+
+To serve the site locally, run:
+
+```bash
+npm run docs:serve
+```
+
+To watch the site files, and re-build automatically, run:
+
+```bash
+npm run docs:watch
+```
+
+The site will usually be served at http://localhost:8000.
+
+## Bundling and minification
+
+This starter project doesn't include any build-time optimizations like bundling or minification. We recommend publishing components as unoptimized JavaScript modules, and performing build-time optimizations at the application level. This gives build tools the best chance to deduplicate code, remove dead code, and so on.
+
+For information on building application projects that include LitElement components, see [Build for production](https://lit-element.polymer-project.org/guide/build) on the LitElement site.
+
+
+## More information
+
+See [Get started](https://lit-element.polymer-project.org/guide/start) on the LitElement site for more information.
