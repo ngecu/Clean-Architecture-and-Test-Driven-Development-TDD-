@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ErrorMessage from './ErrorMessage';
+import { Button, TextField } from '@mui/material';
 
 const SignupForm = ({ onSubmit, errorMessage }) => {
   const [formData, setFormData] = useState({
@@ -28,52 +29,61 @@ const SignupForm = ({ onSubmit, errorMessage }) => {
     <form onSubmit={handleSubmit} className="signup-form">
       {errorMessage && <ErrorMessage message={errorMessage} />}
       <div className="form-group">
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
+       
+        <TextField
+          label="Name"
+          variant="outlined"
           name="name"
           value={name}
           onChange={handleChange}
           required
+          fullWidth
+          margin="normal"
         />
       </div>
       <div className="form-group">
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
+        <TextField
           id="email"
+          label="Email"
+          type="email"
           name="email"
           value={email}
           onChange={handleChange}
           required
+          fullWidth
+          margin="normal"
         />
       </div>
       <div className="form-group">
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
+        <TextField
           id="password"
+          label="Password"
+          type="password"
           name="password"
           value={password}
           onChange={handleChange}
           minLength={6}
           required
+          fullWidth
+          margin="normal"
         />
       </div>
       <div className="form-group">
-        <label htmlFor="confirmPassword">Confirm Password:</label>
-        <input
-          type="password"
+        <TextField
           id="confirmPassword"
+          label="Confirm Password"
+          type="password"
           name="confirmPassword"
           value={confirmPassword}
           onChange={handleChange}
           minLength={6}
           required
+          fullWidth
+          margin="normal"
         />
       </div>
-      <button type="submit">Sign Up</button>
+      <Button variant="contained"  type="submit">Sign Up</Button>
+      
     </form>
   );
 };
