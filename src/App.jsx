@@ -6,6 +6,7 @@ import SignupPage from './presentation/pages/auth/SignupPage'
 import { Provider } from 'react-redux';
 import store from './presentation/state/store';
 import { Container, Grid } from '@mui/material'
+import PaymentPage from './presentation/pages/PaymentPage'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
   </Grid>
   <Grid xs={12}>
     <SignupPage/>
+    {/* <PaymentPage/> */}
   </Grid>
   
 </Grid>

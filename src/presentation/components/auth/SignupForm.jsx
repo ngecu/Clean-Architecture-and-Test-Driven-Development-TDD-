@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from '../ErrorMessage';
 import { Button, TextField } from '@mui/material';
 
 const SignupForm = ({ onSubmit, errorMessage }) => {

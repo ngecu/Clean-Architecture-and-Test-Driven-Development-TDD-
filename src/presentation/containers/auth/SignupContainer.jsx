@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import SignupForm from '../../components/auth/SignupForm';
-import ErrorMessage from '../../components/auth/ErrorMessage';
-import SuccessMessage from '../../components/auth/SuccessMessage';
+import ErrorMessage from '../../components/ErrorMessage';
+import SuccessMessage from '../../components/SuccessMessage';
 import Loader from '../../components/Loader';
 import { registerUser } from '../../state/slices/userSlice';
 
